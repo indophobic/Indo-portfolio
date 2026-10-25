@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INDO | Video Editor – Long-Form + Shorts</title>
+<meta name="description" content="Indo is a video editor for creators. Long-form and short-form edits built around story, pacing and retention.">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+/* Palette: 60% indigo ink, 30% warm cream, 10% amber accent. Violet is amber's complement; rose is a small analogous spark. */
+:root{--bg:#0d0b14;--fg:#f6efe2;--mut:#a9a3b8;--card:#171424;--ln:#2b2542;--a:#ffb020;--b:#7b5cff;--c:#ff5c8a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6efe2;--fg:#17122b;--mut:#5d5675;--card:#ebe2d0;--ln:#d3c8b2;--a:#e08a00;--b:#5b3df0}}
+:root[data-theme="light"]{--bg:#f6efe2;--fg:#17122b;--mut:#5d5675;--card:#ebe2d0;--ln:#d3c8b2;--a:#e08a00;--b:#5b3df0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 .88rem/1.7 "Space Mono",monospace;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:50;background:repeating-radial-gradient(circle at 17% 32%,#fff 0 1px,transparent 1px 3px)}
+h2{font:400 clamp(2.6rem,10vw,6rem)/.92 Anton,Impact,sans-serif;text-transform:uppercase;margin:6px 0 14px}
+h2 em{font-style:normal;color:var(--a)}
+.k{font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
+#bar{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:0;background:linear-gradient(90deg,var(--b),var(--a));z-index:60}
+#tc{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;background:#000b;color:var(--a);padding:6px 10px;border-radius:8px;font-weight:700;font-size:.68rem}
+#tc i{color:#ff4d4d;font-style:normal;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.w{padding:10vh 5vw 2vh;max-width:1180px;margin:auto}
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;padding:8vh 5vw;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:70vmax;height:70vmax;right:-28vmax;top:-22vmax;background:conic-gradient(from 0deg,var(--b),var(--c),var(--a),var(--b));filter:blur(110px);opacity:.28;animation:sp 22s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.g{position:relative;font:400 clamp(6rem,36vw,26rem)/.82 Anton,Impact,sans-serif;display:inline-block;z-index:1;letter-spacing:.01em}
+.g::before,.g::after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen;animation:gl 4s infinite steps(1)}
+.g::before{color:var(--b);transform:translate(-.02em,0)}
+.g::after{color:var(--c);transform:translate(.02em,0);animation-delay:-2s}
+@keyframes gl{0%,90%{clip-path:inset(0)}92%{clip-path:inset(20% 0 55% 0);transform:translate(-.05em,0)}96%{clip-path:inset(60% 0 8% 0);transform:translate(.05em,0)}}
+.hero p{position:relative;z-index:1;max-width:500px;margin-top:22px;font-size:.95rem;color:var(--mut)}
+.hero p b{color:var(--fg)}
+.pill{display:inline-block;border:1.5px solid var(--ln);border-radius:40px;padding:7px 15px;margin:0 8px 8px 0;font-weight:700;font-size:.72rem;background:var(--card);transition:.25s}
+.pill:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px)}
+.btn{display:inline-block;font:700 .85rem "Space Mono",monospace;text-transform:uppercase;letter-spacing:.06em;background:var(--a);color:#17122b;padding:16px 30px;border-radius:50px;text-decoration:none;box-shadow:5px 5px 0 var(--b);transition:.15s;margin-top:26px}
+.btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--b)}
+.tick{overflow:hidden;white-space:nowrap;border-block:1.5px solid var(--ln);padding:15px 0;background:var(--card)}
+.tick div{display:inline-block;animation:mq 30s linear infinite}
+.tick span{display:inline-block;margin:0 22px;font:400 1.4rem Anton,sans-serif;text-transform:uppercase;color:var(--mut)}
+.tick span:nth-child(even){color:var(--a)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.st div{background:var(--card);border:1.5px dashed var(--ln);border-radius:16px;padding:18px;color:var(--mut);font-size:.72rem}
+.st b{display:block;font:400 clamp(2.2rem,9vw,4.4rem)/1 Anton,sans-serif;color:var(--a)}
+.lab{display:grid;gap:22px;margin-top:20px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px}
+.ctl button{font:700 .74rem "Space Mono",monospace;color:var(--fg);background:var(--card);border:1.5px solid var(--ln);border-radius:30px;padding:9px 15px;cursor:pointer;transition:.2s}
+.ctl button.on,.ctl button:hover{background:var(--b);border-color:var(--b);color:#fff;transform:translateY(-2px)}
+.fm button.on{background:var(--a);border-color:var(--a);color:#17122b}
+.pv{position:relative;overflow:hidden;border-radius:18px;border:1.5px solid var(--ln);margin:auto;display:flex;align-items:center;justify-content:center;text-align:center;padding:6%;cursor:pointer;box-shadow:0 24px 60px -24px #000a}
+.pv.long{width:100%;aspect-ratio:16/9;font-size:clamp(1.2rem,5vw,2.8rem)}
+.pv.short{width:min(100%,250px);aspect-ratio:9/16;font-size:1.5rem}
+.pv .t{position:relative;z-index:2;line-height:1.05}
+.w1{display:inline-block;margin:0 .12em;opacity:0;animation:in .45s forwards}
+@keyframes in{from{opacity:0;transform:scale(.2) rotate(-10deg)}60%{transform:scale(1.25)}to{opacity:1;transform:none}}
+.s-ret{background:linear-gradient(135deg,#2a2440,#0d0b14);font-family:Anton,sans-serif;text-transform:uppercase;-webkit-text-stroke:2px #000;paint-order:stroke fill;color:#fff}
+.s-ret .w1:nth-child(3n){color:var(--a)}
+.s-cin{background:linear-gradient(120deg,#1b1b4a,#c4652a);font-family:"Playfair Display",serif;font-style:italic;letter-spacing:.12em;color:#f7ead7}
+.s-cin::before,.s-cin::after{content:"";position:absolute;left:0;right:0;height:13%;background:#000;z-index:3}
+.s-cin::before{top:0}.s-cin::after{bottom:0}
+.s-cin .w1{animation-duration:1.4s;animation-name:fd}
+@keyframes fd{from{opacity:0;filter:blur(8px);letter-spacing:.5em}to{opacity:1}}
+.s-doc{background:linear-gradient(#5f5b70,#25222f);font-family:"Playfair Display",serif;color:#fff;align-items:flex-end;justify-content:flex-start;text-align:left}
+.s-doc .t{border-left:6px solid var(--a);padding:6px 14px;background:#000a}
+.s-doc .w1{animation-name:sl}
+@keyframes sl{from{opacity:0;transform:translateX(-30px)}to{opacity:1}}
+.s-kin{background:#120f1e;font-family:Bungee,sans-serif;color:#fff;text-transform:uppercase}
+.s-kin::before{content:"";position:absolute;width:140%;aspect-ratio:1;background:conic-gradient(var(--b),var(--c),var(--a),var(--b));opacity:.5;animation:sp 7s linear infinite}
+.s-kin .w1{animation-name:kin}
+.s-kin .w1:nth-child(odd){color:var(--a)}
+@keyframes kin{from{opacity:0;transform:translateY(-120%) rotate(40deg) scale(2)}to{opacity:1}}
+.s-vlog{background:linear-gradient(160deg,var(--a),var(--c));font-family:"Permanent Marker",cursive;color:#fff;text-shadow:3px 3px 0 #000;animation:pu .5s 2}
+.s-vlog .w1:nth-child(even){transform:rotate(-5deg);color:#17122b;text-shadow:none;background:#fff;padding:0 .2em}
+@keyframes pu{50%{transform:scale(1.05)}}
+.s-meme{background:radial-gradient(#3b0a2a,#000);font-family:Bungee,sans-serif;color:#ffe600;text-shadow:0 0 14px #f0a,3px 3px 0 #000;text-transform:uppercase}
+.s-meme .w1{animation:in .4s forwards,shk .25s .5s infinite}
+@keyframes shk{25%{transform:translate(2px,-2px) rotate(2deg)}75%{transform:translate(-2px,2px) rotate(-2deg)}}
+.info h3{font:400 2.4rem/1 Anton,sans-serif;text-transform:uppercase;color:var(--a)}
+.info p{margin:8px 0 14px;color:var(--mut)}
+.rt{display:grid;gap:18px;margin-top:18px;align-items:center}
+.rt svg{width:100%;background:var(--card);border:1.5px solid var(--ln);border-radius:18px}
+.rt path{fill:none;stroke-width:4;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.4s ease}
+.in .rt path{stroke-dashoffset:0}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 5vw 18px;align-items:center}
+.cd{flex:none;scroll-snap-align:center;border-radius:16px;border:1.5px solid var(--ln);background:var(--g);position:relative;overflow:hidden;transition:.3s;cursor:pointer}
+.cd.L{width:300px;aspect-ratio:16/9}.cd.S{width:150px;aspect-ratio:9/16}
+.cd:hover{transform:translateY(-8px) rotate(-1.5deg)}
+a.cd{display:block;text-decoration:none;color:inherit}
+a.cd::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:2.6rem;color:#fff;background:#0d0b1466;opacity:0;transition:.25s}
+a.cd:hover::after{opacity:1}
+.cd h4{position:absolute;left:10px;right:10px;bottom:10px;font:400 1.3rem/1 Anton,sans-serif;text-transform:uppercase;color:#fff;text-shadow:0 2px 0 #000}
+.cd i{position:absolute;top:8px;left:8px;font:700 .6rem "Space Mono";font-style:normal;background:#000;color:var(--a);padding:3px 8px;border-radius:20px}
+.cd .th{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cd::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,#0d0b14cc);z-index:1}
+.cd i,.cd h4{z-index:2}
+.cd .pb{position:absolute;inset:0;z-index:2;width:100%;border:0;background:transparent;color:#fff;font-size:2.6rem;cursor:pointer;opacity:.85;transition:.25s;text-shadow:0 2px 14px #000}
+.cd:hover .pb{opacity:1;transform:scale(1.15)}
+.cd .yt{position:absolute;top:8px;right:8px;z-index:3;font:700 .6rem "Space Mono",monospace;background:#000;color:var(--a);padding:3px 8px;border-radius:20px;text-decoration:none}
+.cd.on{width:min(88vw,640px);transform:none!important;cursor:default}
+.cd.on::before{display:none}
+.cd iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:4}
+.tm{display:grid;gap:14px;margin-top:20px}
+.q{position:relative;background:var(--card);border:1.5px solid var(--ln);border-radius:20px;padding:30px 24px 22px;transition:.3s}
+.q:hover{border-color:var(--b);transform:translateY(-4px)}
+.q::before{content:"“";position:absolute;top:-6px;left:18px;font:400 5.5rem/1 Anton,sans-serif;color:var(--a)}
+.q p{font-size:.88rem;margin:14px 0 18px}
+.q .by{display:flex;align-items:center;gap:12px;font-size:.74rem;color:var(--mut)}
+.q .by b{display:block;color:var(--fg)}
+.q .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--c));flex:none}
+.q .sm{position:absolute;top:14px;right:14px;font-size:.58rem;font-weight:700;letter-spacing:.1em;border:1px dashed var(--mut);color:var(--mut);border-radius:20px;padding:2px 8px}
+.rv{opacity:0;transform:translateY(36px);transition:.8s}.rv.in{opacity:1;transform:none}
+.cta{text-align:center;padding:14vh 5vw 8vh;position:relative}
+.cta h2{font-size:clamp(3rem,13vw,9rem)}
+.cta p{color:var(--mut);max-width:440px;margin:0 auto}
+.cta .btn{font-size:1rem}
+footer{padding:10px 5vw 80px;text-align:center;font-size:.7rem;color:var(--mut)}
+@media(min-width:800px){.lab{grid-template-columns:1.5fr 1fr}.rt{grid-template-columns:1.3fr 1fr}.tm{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.w1{opacity:1}.rv{opacity:1;transform:none}.rt path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div id="tc"><i>●</i> <span id="tt">00:00:00:00</span></div>
+
+<header class="hero">
+<span class="pill" style="align-self:flex-start">● Long-form + short-form video editor</span>
+<div class="g" data-t="INDO">INDO</div>
+<p><b>I edit for attention that lasts.</b> Story, pacing and sound, shaped to fit your voice. Pick a style below and watch the same words become a different video.</p>
+<a class="btn" href="#contact" style="align-self:flex-start">Start a project</a>
+</header>
+
+<div class="tick"><div id="tk"></div></div>
+
+<section class="w rv"><span class="k">01 / At a glance</span>
+<div class="st" id="st"></div></section>
+
+<section class="w" id="lab"><span class="k">02 / Style Lab</span><h2>My editing <em>styles</em></h2>
+<p style="color:var(--mut);max-width:560px">Every video needs its own voice. Try each style in both formats.</p>
+<div class="lab">
+<div>
+<div class="ctl fm" style="margin-bottom:14px"><button class="on" data-f="long">▭ Long-form</button><button data-f="short">▯ Short-form</button></div>
+<div class="pv long" id="pv" title="Click to replay"><div class="t" id="pt"></div></div>
+</div>
+<div class="info"><div class="ctl" id="sty" style="margin-bottom:18px"></div><h3 id="sn"></h3><p id="sd"></p><div id="sg"></div></div>
+</div></section>
+
+<section class="w rv"><span class="k">03 / Case study</span><h2>Better <em>retention</em></h2>
+<div class="rt">
+<svg viewBox="0 0 300 150"><text x="8" y="16" fill="#888" font-size="9" font-family="Space Mono">AUDIENCE RETENTION (ILLUSTRATIVE)</text><path d="M5,30 C60,50 100,95 150,115 S260,135 295,138" stroke="#7d7794"/><path d="M5,30 C60,36 120,48 180,60 S260,70 295,76" stroke="var(--a)"/></svg>
+<div><p><b style="color:var(--mut)">Before:</b> viewers drift off early.</p><p style="margin:10px 0"><b style="color:var(--a)">After:</b> a sharper hook, tighter pacing and motion beats that hold the eye.</p><p style="color:var(--mut)">Swap in a real project and its real numbers here.</p></div>
+</div></section>
+
+<section class="rv" style="padding-top:8vh"><div class="w" style="padding-bottom:0"><span class="k">04 / Recent cuts</span><h2>Selected <em>work</em></h2></div><div class="strip" id="wk"></div></section>
+
+<section class="w rv"><span class="k">05 / Kind words</span><h2>What clients <em>say</em></h2>
+<div class="tm" id="tm"></div></section>
+
+<section class="cta rv" id="contact"><span class="k">06 / Contact</span><h2>Let’s make<br><em>it count.</em></h2>
+<p>Tell me about your channel and what you need. I’ll reply with a plan, not a pitch.</p>
+<a class="btn" id="em" href="mailto:hello@example.com">hello@example.com →</a>
+<p style="margin-top:28px;font-size:.72rem">Premiere Pro · After Effects · DaVinci Resolve · CapCut</p></section>
+<footer>© 2026 Indo</footer>
+
+<script>
+/* ===== EDIT ME LATER: everything you’ll customise lives in these lists ===== */
+var EMAIL="hello@example.com";
+var CAPTION="This one edit changes everything about how your video feels";
+var SERVICES=["Long-form","Shorts & Reels","Captions","Motion graphics","Sound design","Colour grade","Hooks & pacing"];
+var STATS=[["00+","Videos edited"],["00M","Total views"],["0 yrs","Editing"]]; /* placeholders: replace with your real numbers */
+var STYLES=[
+{id:"s-ret",n:"Retention Captions",d:"Punchy word-by-word captions with highlight pops. Built to hold attention on Shorts, Reels and talking-head YouTube.",tags:["Hooks","Captions","Fast pacing"]},
+{id:"s-cin",n:"Cinematic",d:"Letterboxed, graded and slow-burning. For brand films, trailers and travel.",tags:["Colour grade","Slow fades","Sound design"]},
+{id:"s-doc",n:"Documentary",d:"Lower thirds, archive feel and story-first structure for deep-dive long-form.",tags:["Story","B-roll","Interview"]},
+{id:"s-kin",n:"Kinetic Motion",d:"Animated type and shapes that move with the beat. Explainers and music-driven edits.",tags:["Motion graphics","Typography","After Effects"]},
+{id:"s-vlog",n:"Vlog Fast-Cut",d:"Jump cuts, stickers and zoom punches with loads of personality.",tags:["Jump cuts","Stickers","Energy"]},
+{id:"s-meme",n:"Meme & Gaming",d:"Shake, glow, sound effects and chaos. Comedy and gaming channels.",tags:["SFX","Memes","Zooms"]}];
+var WORK=[["L","Video Title 01","linear-gradient(135deg,#7b5cff,#ff5c8a)","Long-form","LkSBDbOjVfQ"],["L","Video Title 02","linear-gradient(135deg,#ffb020,#ff5c8a 55%,#1b1b4a)","Long-form","DPHpH5ZqO94"],["L","Video Title 03","linear-gradient(135deg,#1b1b4a,#7b5cff 60%,#ffb020)","Long-form","xo_e7cbm_GQ"],["L","Video Title 04","linear-gradient(135deg,#ff5c8a,#7b5cff)","Long-form","JNGvNggt2g4"],["L","Video Title 05","linear-gradient(135deg,#ffb020,#7b5cff)","Long-form","0EjCSwG3SWk"],["L","Video Title 06","linear-gradient(135deg,#120f1e,#ff5c8a 70%,#ffb020)","Long-form","zI5ioNf98oE"]]; /* each entry: size, title, gradient, label, YouTube video ID. Add Shorts later as ["S",...] */
+/* Set sample:false (and add real quotes) to remove the SAMPLE badge */
+var QUOTES=[
+{q:"Sample quote: Indo understood the tone of my channel straight away and the first cut needed very few changes.",n:"Client Name",r:"Channel / Role",sample:true},
+{q:"Sample quote: Communication was clear, deadlines were met and the pacing of the final edit felt much sharper.",n:"Client Name",r:"Channel / Role",sample:true},
+{q:"Sample quote: The Shorts gave us a consistent look we could recognise instantly across platforms.",n:"Client Name",r:"Channel / Role",sample:true}];
+/* ========================================================================== */
+var $=function(i){return document.getElementById(i)},cur=0;
+$("tk").innerHTML=SERVICES.concat(SERVICES,SERVICES).map(function(s){return"<span>"+s+"</span><span>✦</span>"}).join("");
+$("st").innerHTML=STATS.map(function(s){return"<div><b>"+s[0]+"</b>"+s[1]+"</div>"}).join("");
+$("wk").innerHTML=WORK.map(function(w){return'<div class="cd '+w[0]+'" data-id="'+w[4]+'" style="--g:'+w[2]+'"><img class="th" src="https://i.ytimg.com/vi/'+w[4]+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><i>'+w[3]+'</i><h4>'+w[1]+'</h4><button class="pb" aria-label="Play '+w[1]+'">▶</button><a class="yt" href="https://www.youtube.com/watch?v='+w[4]+'" target="_blank" rel="noopener">YouTube ↗</a></div>'}).join("");
+document.querySelectorAll("#wk .cd").forEach(function(c){c.querySelector(".pb").onclick=function(){document.querySelectorAll("#wk .cd.on").forEach(function(o){o.classList.remove("on");var f=o.querySelector("iframe");if(f)f.remove()});var f=document.createElement("iframe");f.src="https://www.youtube.com/embed/"+c.dataset.id+"?autoplay=1&rel=0&playsinline=1";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title="Video player";c.appendChild(f);c.classList.add("on");setTimeout(function(){c.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})},60)}});
+$("tm").innerHTML=QUOTES.map(function(x){return'<figure class="q">'+(x.sample?'<span class="sm">SAMPLE</span>':'')+'<p>'+x.q+'</p><figcaption class="by"><span class="av"></span><span><b>'+x.n+'</b>'+x.r+'</span></figcaption></figure>'}).join("");
+$("em").href="mailto:"+EMAIL;$("em").textContent=EMAIL+" →";
+STYLES.forEach(function(s,i){var b=document.createElement("button");b.textContent=s.n;b.onclick=function(){cur=i;show()};$("sty").appendChild(b)});
+function show(){var s=STYLES[cur],pv=$("pv"),fmt=pv.classList.contains("short")?"short":"long";
+pv.className="pv "+fmt+" "+s.id;
+$("pt").innerHTML=CAPTION.split(" ").map(function(w,i){return'<span class="w1" style="animation-delay:'+(i*.2)+'s">'+w+'</span>'}).join(" ");
+$("sn").textContent=s.n;$("sd").textContent=s.d;$("sg").innerHTML=s.tags.map(function(t){return'<span class="pill">'+t+'</span>'}).join("");
+[].forEach.call($("sty").children,function(b,i){b.classList.toggle("on",i==cur)})}
+$("pv").onclick=show;
+document.querySelectorAll(".fm button").forEach(function(b){b.onclick=function(){document.querySelectorAll(".fm button").forEach(function(x){x.classList.remove("on")});b.classList.add("on");var pv=$("pv");pv.classList.remove("long","short");pv.classList.add(b.dataset.f);show()}});
+show();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll(".rv").forEach(function(r){io.observe(r)});
+function p2(n){return(n<10?"0":"")+n}
+addEventListener("scroll",function(){var h=document.documentElement,p=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);$("bar").style.width=p*100+"%";var f=Math.floor(p*180*24);$("tt").textContent="00:"+p2(Math.floor(f/1440))+":"+p2(Math.floor(f/24)%60)+":"+p2(f%24)},{passive:true});
+</script>
+</body>
+</html>

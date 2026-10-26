@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INDO | Video Editor – Long-Form + Shorts</title>
+<meta name="description" content="Indo is a video editor for creators. Long-form and short-form edits built around story, pacing and retention.">
+<meta property="og:title" content="INDO | Video Editor">
+<meta property="og:description" content="Long-form and short-form edits built around story, pacing and retention.">
+<meta property="og:image" content="https://i.ibb.co/0jWpQV6z/file-00000000ace082118c315242524c9d89.png">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Palette: 60% indigo ink, 30% warm cream, 10% amber accent. Violet complements amber; rose is a small spark. */
+:root{--bg:#0d0b14;--fg:#f6efe2;--mut:#a9a3b8;--card:#171424;--ln:#2b2542;--a:#ffb020;--b:#7b5cff;--c:#ff5c8a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6efe2;--fg:#17122b;--mut:#5d5675;--card:#ebe2d0;--ln:#d3c8b2;--a:#e08a00;--b:#5b3df0}}
+:root[data-theme="light"]{--bg:#f6efe2;--fg:#17122b;--mut:#5d5675;--card:#ebe2d0;--ln:#d3c8b2;--a:#e08a00;--b:#5b3df0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 .88rem/1.7 "Space Mono",monospace;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:50;background:repeating-radial-gradient(circle at 17% 32%,#fff 0 1px,transparent 1px 3px)}
+button{font:inherit;color:inherit}
+h2{font:400 clamp(2.6rem,10vw,6rem)/.92 Anton,Impact,sans-serif;text-transform:uppercase;margin:6px 0 12px}
+h2 em{font-style:normal;color:var(--a)}
+.k{font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b)}
+:focus-visible{outline:3px solid var(--a);outline-offset:3px}
+#bar{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:0;background:linear-gradient(90deg,var(--b),var(--a));z-index:60}
+#tc{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;background:#000b;color:var(--a);padding:6px 10px;border-radius:8px;font-weight:700;font-size:.68rem}
+#tc i{color:#ff4d4d;font-style:normal;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.w{padding:9vh 5vw 2vh;max-width:1180px;margin:auto}
+.hero{min-height:76vh;display:flex;flex-direction:column;justify-content:center;padding:7vh 5vw 5vh;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:70vmax;height:70vmax;right:-28vmax;top:-22vmax;background:conic-gradient(from 0deg,var(--b),var(--c),var(--a),var(--b));filter:blur(110px);opacity:.28;animation:sp 22s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.g{position:relative;font:400 clamp(6rem,34vw,24rem)/.82 Anton,Impact,sans-serif;display:inline-block;z-index:1}
+.g::before,.g::after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen;animation:gl 4s infinite steps(1)}
+.g::before{color:var(--b);transform:translate(-.02em,0)}
+.g::after{color:var(--c);transform:translate(.02em,0);animation-delay:-2s}
+@keyframes gl{0%,90%{clip-path:inset(0)}92%{clip-path:inset(20% 0 55% 0);transform:translate(-.05em,0)}96%{clip-path:inset(60% 0 8% 0);transform:translate(.05em,0)}}
+.hero p{position:relative;z-index:1;max-width:500px;margin-top:20px;font-size:.95rem;color:var(--mut)}
+.hero p b{color:var(--fg)}
+.pill{display:inline-block;border:1.5px solid var(--ln);border-radius:40px;padding:7px 15px;margin:0 8px 8px 0;font-weight:700;font-size:.72rem;background:var(--card)}
+.btn{display:inline-block;font:700 .85rem "Space Mono",monospace;text-transform:uppercase;letter-spacing:.06em;background:var(--a);color:#17122b;padding:16px 28px;border-radius:50px;text-decoration:none;border:0;cursor:pointer;box-shadow:5px 5px 0 var(--b);transition:.15s;margin:22px 10px 0 0}
+.btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--b)}
+.btn.o{background:none;color:var(--fg);box-shadow:none;border:2px solid var(--ln)}
+.btn.o:hover{border-color:var(--a);transform:none}
+.tick{overflow:hidden;white-space:nowrap;border-block:1.5px solid var(--ln);padding:14px 0;background:var(--card)}
+.tick div{display:inline-block;animation:mq 30s linear infinite}
+.tick span{display:inline-block;margin:0 22px;font:400 1.35rem Anton,sans-serif;text-transform:uppercase;color:var(--mut)}
+.tick span:nth-child(even){color:var(--a)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* hybrid video showcase */
+.fm{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:520px;margin:14px 0}
+.fm button{display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:700;font-size:.85rem;text-transform:uppercase;background:var(--card);border:2px solid var(--ln);border-radius:16px;padding:14px 10px;cursor:pointer;transition:.2s}
+.fm button small{font-weight:400;font-size:.65rem;color:var(--mut)}
+.fm button.on{background:var(--a);border-color:var(--a);color:#17122b;box-shadow:0 10px 30px -10px var(--a)}
+.fm button.on small{color:#17122bcc}
+.chips{position:relative;display:flex;gap:8px;overflow-x:auto;padding:4px 5vw 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.ch{flex:none;font-weight:700;font-size:.74rem;background:var(--card);border:1.5px solid var(--ln);border-radius:30px;padding:10px 16px;cursor:pointer;transition:.2s;white-space:nowrap}
+.ch:hover{border-color:var(--a)}
+.ch.on{background:var(--b);border-color:var(--b);color:#fff}
+.nv{display:flex;align-items:center;justify-content:space-between;padding:0 5vw 10px;color:var(--mut);font-size:.75rem}
+.nv div{display:flex;gap:8px}
+.nv button{width:44px;height:44px;border-radius:50%;border:2px solid var(--ln);background:var(--card);cursor:pointer;font-size:1.1rem;transition:.2s}
+.nv button:hover{background:var(--a);color:#17122b;border-color:var(--a)}
+.strip{position:relative;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 5vw 26px;scroll-padding:0 5vw;align-items:center;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.cd{flex:none;scroll-snap-align:start;border-radius:22px;border:2px solid var(--ln);background:var(--g);position:relative;overflow:hidden;opacity:.5;transform:scale(.95);transition:opacity .35s,transform .35s,box-shadow .35s}
+.cd.act{opacity:1;transform:none;box-shadow:0 0 0 2px var(--a),0 34px 80px -34px var(--b)}
+.cd.L{width:min(84vw,820px);aspect-ratio:16/9}
+.cd.S{width:min(64vw,300px);aspect-ratio:9/16}
+.cd::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,#0d0b14e6);z-index:1;pointer-events:none}
+.cd.on::before,.cd.on .pb,.cd.on h4,.cd.on .tg{display:none}
+.th{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tg{position:absolute;top:12px;left:12px;z-index:2;font:700 .65rem "Space Mono",monospace;background:#000c;color:var(--a);padding:5px 11px;border-radius:30px}
+.cd h4{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;font:400 clamp(1.6rem,5.5vw,2.8rem)/.95 Anton,sans-serif;text-transform:uppercase;color:#fff;text-shadow:0 3px 0 #0008}
+.pb{position:absolute;inset:0;z-index:2;display:grid;place-items:center;width:100%;border:0;background:transparent;cursor:pointer}
+.pb b{display:grid;place-items:center;width:clamp(64px,14vw,92px);aspect-ratio:1;border-radius:50%;background:var(--a);color:#17122b;font-size:clamp(1.6rem,5vw,2.4rem);padding-left:.12em;box-shadow:0 0 0 0 #ffb02099;animation:pulse 2s infinite;transition:.25s}
+.pb:hover b{transform:scale(1.12)}
+@keyframes pulse{70%{box-shadow:0 0 0 22px #ffb02000}100%{box-shadow:0 0 0 0 #ffb02000}}
+.yt{position:absolute;top:12px;right:12px;z-index:3;font:700 .65rem "Space Mono",monospace;background:#000c;color:#fff;padding:5px 11px;border-radius:30px;text-decoration:none}
+.soon{position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-weight:700;font-size:.78rem;color:#fff;text-align:center;padding:10px}
+.cd iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:4}
+/* stats */
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.st div{background:var(--card);border:1.5px solid var(--ln);border-radius:18px;padding:20px 10px;text-align:center;color:var(--mut);font-size:.72rem}
+.st b{display:block;font:400 clamp(2.2rem,10vw,5rem)/1 Anton,sans-serif;color:var(--a)}
+/* testimonials */
+.tm{display:grid;gap:14px;margin-top:18px}
+.q{position:relative;text-align:left;background:var(--card);border:1.5px solid var(--ln);border-radius:20px;padding:34px 22px 20px;cursor:pointer;transition:.3s;width:100%}
+.q:hover{border-color:var(--b);transform:translateY(-4px)}
+.q::before{content:"“";position:absolute;top:-6px;left:18px;font:400 5.5rem/1 Anton,sans-serif;color:var(--a)}
+.q p{font-size:.86rem;margin:12px 0 16px}
+.q .by{display:flex;align-items:center;gap:12px;font-size:.74rem;color:var(--mut)}
+.q .by b{display:block;color:var(--fg)}
+.av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--c));flex:none}
+.q .hint{display:block;margin-top:14px;font-size:.68rem;font-weight:700;color:var(--b)}
+.sm{position:absolute;top:14px;right:14px;font-size:.58rem;font-weight:700;letter-spacing:.1em;border:1px dashed var(--mut);color:var(--mut);border-radius:20px;padding:2px 8px}
+.md{position:fixed;inset:0;z-index:90;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px}
+.md[hidden]{display:none}
+.mb{position:relative;max-width:560px;width:100%;max-height:88vh;overflow:auto;background:var(--card);border:2px solid var(--ln);border-radius:20px;padding:16px}
+.mb img{display:block;width:100%;border-radius:12px}
+.ph{display:grid;place-items:center;text-align:center;min-height:280px;border:2px dashed var(--ln);border-radius:12px;padding:20px;color:var(--mut)}
+.x{position:sticky;top:0;float:right;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--a);color:#17122b;font-size:1.1rem;font-weight:700;cursor:pointer;margin:0 0 8px 8px}
+.fm button{flex-direction:row;gap:12px;text-align:left}
+.fm button svg{width:28px;height:28px;flex:none}
+.fm button span{display:flex;flex-direction:column;line-height:1.25}
+.so{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+.sc{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:var(--fg);font-size:.7rem;font-weight:700;width:80px}
+.sc i{--eye:var(--card);display:grid;place-items:center;width:66px;height:66px;border-radius:50%;background:var(--card);border:2px solid var(--fg);color:var(--fg);transition:.25s}
+.sc svg{width:30px;height:30px}
+.sc:hover i,.sc:focus-visible i{--eye:var(--a);background:var(--a);color:#17122b;border-color:var(--a);transform:translateY(-4px)}
+.me{display:flex;align-items:center;gap:16px;flex-wrap:wrap;align-self:flex-start;position:relative;z-index:1;margin-bottom:8px}
+.me .pill{margin:0}
+.av2{flex:none;width:clamp(92px,26vw,132px);aspect-ratio:1;border-radius:50%;padding:4px;background:conic-gradient(var(--a),var(--c),var(--b),var(--a));box-shadow:0 14px 40px -14px var(--b)}
+.ph2{position:relative;display:grid;place-items:center;width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--card);border:3px solid var(--bg);font:400 2.8rem Anton,sans-serif;color:var(--a)}
+.ph2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero{align-items:center;text-align:center}
+.me{flex-direction:column;align-self:center;gap:16px}
+.av2{width:clamp(150px,42vw,230px)}
+.ph2{font-size:4.5rem}
+.hero p{margin-left:auto;margin-right:auto}
+.hero .btn{margin:22px 6px 0}
+.cd.S h4{font-size:1.5rem}
+.chn{display:grid;gap:12px;margin-top:16px}
+.cc{display:flex;gap:14px;align-items:center;background:var(--card);border:1.5px solid var(--ln);border-radius:20px;padding:16px;text-decoration:none;color:inherit;transition:.25s}
+.cc:hover{border-color:var(--a);transform:translateY(-3px)}
+.pf{position:relative;flex:none;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--b),var(--c));display:grid;place-items:center;font:400 1.8rem Anton,sans-serif;color:#fff;overflow:hidden}
+.pf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cc b{display:block;font:400 1.5rem/1.1 Anton,sans-serif;text-transform:uppercase;word-break:break-word}
+.cc small{display:block;color:var(--mut);font-size:.72rem}
+.cc p{font-size:.78rem;margin-top:4px;color:var(--mut)}
+.cc .sb{color:var(--a);font-weight:700}
+.rvw{columns:2;column-gap:12px;margin-top:18px}
+.rp{display:block;width:100%;margin:0 0 12px;break-inside:avoid;padding:0;border:2px solid var(--ln);border-radius:14px;overflow:hidden;background:var(--card);cursor:zoom-in;transition:.25s}
+.rp:hover{border-color:var(--a);transform:translateY(-3px)}
+.rp img{display:block;width:100%;height:100%;object-fit:cover}
+@media(min-width:800px){.chn{grid-template-columns:repeat(3,1fr)}.rvw{columns:3}}
+.rv{opacity:0;transform:translateY(30px);transition:.8s}.rv.in{opacity:1;transform:none}
+.cta{text-align:center;padding:12vh 5vw 8vh}
+.cta h2{font-size:clamp(3rem,13vw,9rem)}
+.cta p{color:var(--mut);max-width:440px;margin:0 auto}
+.cta .btn{font-size:1rem;margin-top:26px}
+footer{padding:10px 5vw 90px;text-align:center;font-size:.7rem;color:var(--mut)}
+.fix{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;margin:0;padding:12px 18px;font-size:.72rem;box-shadow:3px 3px 0 var(--b)}
+@media(min-width:800px){.tm{grid-template-columns:repeat(3,1fr)}.nv{padding:0 5vw 10px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div id="tc"><i>●</i> <span id="tt">00:00:00:00</span></div>
+
+<header class="hero">
+<div class="me"><span class="av2"><span class="ph2">I<img src="https://i.ibb.co/0jWpQV6z/file-00000000ace082118c315242524c9d89.png" alt="Indo, video editor" width="1254" height="1254" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.src='https://i.ibb.co/7JTxbNZ0/file-00000000ace082118c315242524c9d89.png'}"></span></span><span class="pill">● Long-form + short-form video editor</span></div>
+<div class="g" data-t="INDO">INDO</div>
+<p><b>I edit for attention that lasts.</b> Story, pacing and sound, shaped to fit your voice. Scroll down and press play on my work.</p>
+<div><a class="btn" href="#work">Watch my work ↓</a><a class="btn o" href="#contact">Start a project</a></div>
+</header>
+
+<div class="tick"><div id="tk"></div></div>
+
+<section id="work" style="padding-top:8vh">
+<div class="w" style="padding-bottom:0"><span class="k">01 / The work</span><h2>Press <em>play</em></h2>
+<p style="color:var(--mut);max-width:520px">Pick a format, swipe through, or tap a title to jump straight to it.</p>
+<div class="fm" role="group" aria-label="Video format"><button class="on" data-f="long" id="bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg><span>Long-form<small id="nl"></small></span></button><button data-f="short" id="bs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="3"/><path d="M10.5 9.5v5l3.8-2.5z" fill="currentColor"/></svg><span>Short-form<small id="ns"></small></span></button></div></div>
+<div class="chips" id="chips" role="group" aria-label="Video titles"></div>
+<div class="nv"><span id="ct" aria-live="polite"></span><div><button id="pv" aria-label="Previous video">←</button><button id="nx" aria-label="Next video">→</button></div></div>
+<div class="strip" id="wk"></div>
+</section>
+
+<section class="w rv"><span class="k">02 / At a glance</span>
+<div class="st" id="st"></div></section>
+
+<section class="w rv"><span class="k">03 / Clients</span><h2>Previously worked <em>with:</em></h2>
+<div class="chn" id="chn"></div></section>
+
+<section class="w rv"><span class="k">04 / Client reviews</span><h2>Client <em>reviews</em></h2>
+<p style="color:var(--mut)">Tap any review to view it full size.</p>
+<div class="rvw" id="rvw"></div></section>
+
+<section class="cta rv" id="contact"><span class="k">05 / Contact</span><h2>Let’s make<br><em>it count.</em></h2>
+<p>Tell me about your channel and what you need. I’ll reply with a plan, not a pitch.</p>
+<a class="btn" id="em" href="mailto:ancientindominus@gmail.com">Email me →</a>
+<p class="k" style="margin-top:36px">Or find me here</p>
+<div class="so">
+<a class="sc" href="https://www.instagram.com/indominoe" target="_blank" rel="noopener" aria-label="Instagram"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></i>Instagram</a>
+<a class="sc" href="https://discord.com/users/788637737229484033" target="_blank" rel="noopener" aria-label="Discord"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.2 6.2C6.9 5 8.9 4.4 11 4.2l.5.9h1l.5-.9c2.1.2 4.1.8 5.8 2 1.6 2.9 2.4 6 2.2 9.8-1.4 1.1-2.9 1.8-4.5 2.2l-1-1.7c.5-.2 1-.4 1.5-.7-3.2 1.3-6.8 1.3-10 0 .5.3 1 .5 1.5.7l-1 1.7c-1.6-.4-3.1-1.1-4.5-2.2-.2-3.8.6-6.9 2.2-9.8z"/><circle cx="9" cy="12.2" r="1.7" style="fill:var(--eye)"/><circle cx="15" cy="12.2" r="1.7" style="fill:var(--eye)"/></svg></i>Discord</a>
+<a class="sc" href="https://wa.me/918500176865" target="_blank" rel="noopener" aria-label="WhatsApp"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path transform="translate(7.4 7.4) scale(.38)" fill="currentColor" stroke="none" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></i>WhatsApp</a>
+<a class="sc" href="https://www.reddit.com/user/AncientBoyX/" target="_blank" rel="noopener" aria-label="Reddit"><i><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="14" rx="8" ry="5.6" fill="currentColor"/><circle cx="4.6" cy="11.6" r="2" fill="currentColor"/><circle cx="19.4" cy="11.6" r="2" fill="currentColor"/><circle cx="16.6" cy="4.8" r="1.6" fill="currentColor"/><path d="M12 8.6L13.2 4.2 15.2 4.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="13" r="1.4" style="fill:var(--eye)"/><circle cx="15" cy="13" r="1.4" style="fill:var(--eye)"/><path d="M9.2 16.3c1.7 1.1 3.9 1.1 5.6 0" style="fill:none;stroke:var(--eye)" stroke-width="1.3" stroke-linecap="round"/></svg></i>Reddit</a>
+</div>
+</section>
+<footer>© 2026 Indo</footer>
+<a class="btn fix" href="#contact">Start a project</a>
+
+<div class="md" id="md" hidden role="dialog" aria-modal="true" aria-label="Testimonial screenshot"><div class="mb"><button class="x" id="xc" aria-label="Close">✕</button><div id="mi"></div></div></div>
+
+<script>
+/* ===== EDIT ME LATER: your email, videos and testimonials live in these lists ===== */
+var EMAIL="ancientindominus@gmail.com";
+var SERVICES=["Long-form","Shorts & Reels","Captions","Motion graphics","Sound design","Colour grade","Hooks & pacing"];
+var STATS=[[200,"+","Videos edited"],[5,"M+","Total views"],[5," yrs","Experience"]];
+var G=["linear-gradient(135deg,#7b5cff,#ff5c8a)","linear-gradient(135deg,#ffb020,#ff5c8a 55%,#1b1b4a)","linear-gradient(135deg,#1b1b4a,#7b5cff 60%,#ffb020)","linear-gradient(135deg,#ff5c8a,#7b5cff)","linear-gradient(135deg,#ffb020,#7b5cff)","linear-gradient(135deg,#120f1e,#ff5c8a 70%,#ffb020)"];
+/* v(format, title, editing style, YouTube video ID, gradient). Leave the ID empty until you have the link. */
+function v(f,t,s,id,g){return{f:f,t:t,s:s,id:id,g:G[g]}}
+var VIDEOS=[
+v("long","High retention style","","LkSBDbOjVfQ",0),
+v("long","Indie dev faceless","","DPHpH5ZqO94",1),
+v("long","Explainer / Breakdown style","","xo_e7cbm_GQ",2),
+v("long","Talking head typography","","0EjCSwG3SWk",4),
+v("long","Video game updates","","zI5ioNf98oE",5),
+v("long","Game lore style","","KzDEwNXy5fw",1),
+v("long","SaaS / Motion graphics","","RGH9KW5X7qE",2),
+v("long","Crime documentary","","DWfAK-iQ5oY",3),
+v("long","YouTube documentary","","O15KJvUPnpk",4),
+v("short","Mascot faceless short","","8eiL1weqAtY",0),
+v("short","MrBeast style","","78EUkoF7xFg",3),
+v("short","Cute vlog style","","hF1dU7m2EqQ",1),
+v("short","Musical artists","","GnCAZfVW3Bc",4),
+v("short","UGC editing","","5hQy4tw9HzY",2),
+v("short","White screen explainer style","","OvKMyda0Xlk",5),
+v("short","Comic / Facts explainer style","","i3Nw9k9vacM",0)];
+/* Clients: h = YouTube handle without @. name, subs (like "12K"), pfp (profile picture address) and note are yours to fill in. */
+var API_KEY="AIzaSyCB6Vpg2dfZzB9bCUVAG8HKWmj88j5yrtM"; /* optional: paste a YouTube Data API key to fill name, photo and subscriber count automatically */
+var CHANNELS=[
+{h:"imwasded",name:"WASDed",subs:"",pfp:"",note:"Game lore, told like a blockbuster."},
+{h:"andytriescoding",name:"andytriescoding",subs:"",pfp:"",note:"Codes for fun, and makes it fun to watch."},
+{h:"obloid",name:"obloid",subs:"3.3K",unit:"followers",tag:"obloid.app",url:"https://www.instagram.com/obloid.app",lock:1,pfp:"",note:"3D printing, now with its own app."}];
+/* Client reviews: [image address, width, height]. The sizes keep every screenshot in its true proportion. */
+var REVIEWS=[
+["https://i.ibb.co/q3kggf0h/IMG-20261026-165036.jpg",1080,648],
+["https://i.ibb.co/Xfv5x99H/IMG-20261026-165121.jpg",1076,1544],
+["https://i.ibb.co/ZkJQ748/IMG-20261026-165233.jpg",1080,864],
+["https://i.ibb.co/bhxWKxP/IMG-20261026-165309.jpg",1080,616],
+["https://i.ibb.co/1f7wB6zX/IMG-20261026-165447.jpg",1080,1888],
+["https://i.ibb.co/yFkSqqsP/IMG-20261026-165518.jpg",1080,880]];
+/* ========================================================================== */
+var $=function(i){return document.getElementById(i)},fmt="long",act=0,L=[];
+$("tk").innerHTML=SERVICES.concat(SERVICES,SERVICES).map(function(s){return"<span>"+s+"</span><span>✦</span>"}).join("");
+$("em").href="mailto:"+EMAIL;$("em").textContent="Email me →";
+$("st").innerHTML=STATS.map(function(s){return'<div><b data-n="'+s[0]+'" data-s="'+s[1]+'">0</b>'+s[2]+'</div>'}).join("");
+var nL=VIDEOS.filter(function(x){return x.f=="long"}).length,nS=VIDEOS.length-nL;
+$("nl").textContent=nL+" videos";$("ns").textContent=nS+" videos";
+function card(x){var c='<div class="cd '+(x.f=="long"?"L":"S")+'" style="--g:'+x.g+'">';
+if(x.id)c+='<img class="th" src="https://i.ytimg.com/vi/'+x.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">';
+c+='<span class="tg">'+(x.f=="long"?"Long-form":"Short-form")+(x.s?' · '+x.s:'')+'</span><h4>'+x.t+'</h4>';
+c+=x.id?'<button class="pb" aria-label="Play '+x.t+'"><b>▶</b></button><a class="yt" href="https://www.youtube.com/watch?v='+x.id+'" target="_blank" rel="noopener">YouTube ↗</a>':'<span class="soon">Video link coming soon</span>';
+return c+'</div>'}
+function render(){L=VIDEOS.filter(function(x){return x.f==fmt});
+$("chips").innerHTML=L.map(function(x,i){return'<button class="ch" data-i="'+i+'">'+x.t+'</button>'}).join("");
+$("wk").innerHTML=L.map(card).join("");$("wk").scrollLeft=0;$("chips").scrollLeft=0;act=-1;setAct(0)}
+function setAct(i){if(i==act)return;act=i;var cs=$("wk").children,hs=$("chips").children;
+for(var k=0;k<cs.length;k++){cs[k].classList.toggle("act",k==i);hs[k].classList.toggle("on",k==i)}
+$("ct").textContent=(i+1)+" / "+L.length;
+var h=hs[i],c=$("chips");c.scrollTo({left:h.offsetLeft-(c.clientWidth-h.offsetWidth)/2,behavior:"smooth"})}
+function go(i){i=Math.max(0,Math.min(L.length-1,i));var s=$("wk"),c=s.children[i],p=parseFloat(getComputedStyle(s).paddingLeft);s.scrollTo({left:c.offsetLeft-p,behavior:"smooth"});setAct(i)}
+function play(c){document.querySelectorAll("#wk .cd.on").forEach(function(o){o.classList.remove("on");var f=o.querySelector("iframe");if(f)f.remove()});
+var i=[].indexOf.call($("wk").children,c);var x=L[i];var f=document.createElement("iframe");
+f.src="https://www.youtube.com/embed/"+x.id+"?autoplay=1&rel=0&playsinline=1";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title=x.t;c.appendChild(f);c.classList.add("on")}
+$("wk").addEventListener("click",function(e){var b=e.target.closest(".pb");if(b)play(b.parentNode)});
+$("chips").addEventListener("click",function(e){var b=e.target.closest(".ch");if(b)go(+b.dataset.i)});
+$("pv").onclick=function(){go(act-1)};$("nx").onclick=function(){go(act+1)};
+var tk=0;$("wk").addEventListener("scroll",function(){if(tk)return;tk=requestAnimationFrame(function(){tk=0;var s=$("wk"),p=parseFloat(getComputedStyle(s).paddingLeft),b=0,d=1e9;
+for(var k=0;k<s.children.length;k++){var m=Math.abs(s.children[k].offsetLeft-p-s.scrollLeft);if(m<d){d=m;b=k}}setAct(b)})},{passive:true});
+[$("bl"),$("bs")].forEach(function(b){b.onclick=function(){fmt=b.dataset.f;$("bl").classList.toggle("on",fmt=="long");$("bs").classList.toggle("on",fmt=="short");render()}});
+render();
+/* testimonials */
+function fmtN(n){n=+n;return n>=1e6?(n/1e6).toFixed(1).replace(".0","")+"M":n>=1e3?(n/1e3).toFixed(1).replace(".0","")+"K":""+n}
+function chCard(c){return'<a class="cc" href="'+(c.url||"https://youtube.com/@"+c.h)+'" target="_blank" rel="noopener"><span class="pf">'+c.name.replace("@","").charAt(0).toUpperCase()+(c.pfp?'<img src="'+c.pfp+'" alt="" onerror="this.remove()">':'')+'</span><span><b>'+c.name+'</b><small>@'+(c.tag||c.h)+(c.subs?' · <span class="sb">'+c.subs+' '+(c.unit||'subscribers')+'</span>':'')+'</small>'+(c.note?'<p>'+c.note+'</p>':'')+'</span></a>'}
+function drawCh(){$("chn").innerHTML=CHANNELS.map(chCard).join("")}drawCh();
+if(API_KEY){CHANNELS.forEach(function(c){fetch("https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=@"+c.h+"&key="+API_KEY).then(function(r){return r.json()}).then(function(d){var it=d.items&&d.items[0];if(!it)return;c.name=it.snippet.title;var t=it.snippet.thumbnails;c.pfp=(t.high||t.default).url;if(!it.statistics.hiddenSubscriberCount&&!c.lock)c.subs=fmtN(it.statistics.subscriberCount);drawCh()}).catch(function(){})})}
+$("rvw").innerHTML=REVIEWS.map(function(r,i){return'<button class="rp" data-i="'+i+'" style="aspect-ratio:'+r[1]+'/'+r[2]+'" aria-label="View client review '+(i+1)+' full size"><img src="'+r[0]+'" alt="Client review '+(i+1)+'" loading="lazy" width="'+r[1]+'" height="'+r[2]+'"></button>'}).join("");
+var last=null;function closeM(){$("md").hidden=true;document.body.style.overflow="";if(last)last.focus()}
+$("rvw").addEventListener("click",function(e){var b=e.target.closest(".rp");if(!b)return;last=b;var x=REVIEWS[+b.dataset.i];
+$("mi").innerHTML='<img src="'+x[0]+'" alt="Client review screenshot">';
+$("md").hidden=false;document.body.style.overflow="hidden";$("xc").focus()});
+$("xc").onclick=closeM;$("md").addEventListener("click",function(e){if(e.target===$("md"))closeM()});
+addEventListener("keydown",function(e){if(e.key=="Escape"&&!$("md").hidden)closeM()});
+/* reveal + counters */
+function cnt(el){var n=+el.dataset.n,s=el.dataset.s,t=0,id=setInterval(function(){t=Math.min(n,t+Math.ceil(n/40));el.textContent=t+(t==n?s:"");if(t==n)clearInterval(id)},35)}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");e.target.querySelectorAll("[data-n]").forEach(cnt);io.unobserve(e.target)}})},{threshold:.2});
+document.querySelectorAll(".rv").forEach(function(r){io.observe(r)});
+function p2(n){return(n<10?"0":"")+n}
+addEventListener("scroll",function(){var h=document.documentElement,p=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);$("bar").style.width=p*100+"%";var f=Math.floor(p*180*24);$("tt").textContent="00:"+p2(Math.floor(f/1440))+":"+p2(Math.floor(f/24)%60)+":"+p2(f%24)},{passive:true});
+</script>
+</body>
+</html>
